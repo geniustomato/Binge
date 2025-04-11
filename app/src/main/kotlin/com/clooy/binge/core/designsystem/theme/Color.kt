@@ -1,4 +1,4 @@
-package com.clooy.binge.ui.theme
+package com.clooy.binge.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

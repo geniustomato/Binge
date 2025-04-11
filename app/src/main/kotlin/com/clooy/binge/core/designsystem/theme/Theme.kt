@@ -1,6 +1,5 @@
-package com.clooy.binge.ui.theme
+package com.clooy.binge.core.designsystem.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
