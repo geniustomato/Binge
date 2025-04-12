@@ -39,16 +39,16 @@ android {
     buildFeatures {
         compose = true
     }
-
-    testOptions {
-        unitTests.all {
-            it.useJUnitPlatform()
-        }
-    }
 }
 
 kapt {
     correctErrorTypes = true
+}
+
+// TODO Temporary workaround? https://github.com/mockk/mockk/issues/1171
+tasks.withType<Test> {
+    useJUnitPlatform()
+    jvmArgs = listOf("-XX:+EnableDynamicAgentLoading")
 }
 
 dependencies {
