@@ -2,12 +2,12 @@ package com.clooy.binge.feature.movieviewer.data.utils
 
 import com.clooy.binge.feature.movieviewer.data.remote.dto.MovieDetailsDto
 import com.clooy.binge.feature.movieviewer.data.remote.dto.MovieGenreDto
-import com.clooy.binge.feature.movieviewer.data.remote.dto.MovieSummaryItemDto
+import com.clooy.binge.feature.movieviewer.data.remote.dto.MovieSummaryDto
 import com.clooy.binge.feature.movieviewer.domain.model.MovieDetails
 import com.clooy.binge.feature.movieviewer.domain.model.MovieGenre
 import com.clooy.binge.feature.movieviewer.domain.model.MovieSummary
 
-internal fun MovieSummaryItemDto.toMovieSummary(): MovieSummary =
+internal fun MovieSummaryDto.toMovieSummary(): MovieSummary =
     MovieSummary(
         title = title,
         releaseDate = releaseDate.toLocalDate(),

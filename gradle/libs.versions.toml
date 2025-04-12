@@ -2,20 +2,31 @@
 agp = "8.8.2"
 kotlin = "2.0.0"
 coreKtx = "1.16.0"
-junit = "4.13.2"
+junit4 = "4.13.2"
+junit5 = "5.11.3"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxCoroutinesTest = "1.7.3"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 composeBom = "2025.04.00"
+mockk = "1.14.0"
 retrofit = "2.11.0"
 coroutines = "1.10.1"
 googleDaggerHilt = "2.55"
 threetenabp = "1.4.9"
 
 [libraries]
+
+# Testing
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+junit5-jupiter-api = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
+junit5-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+
+# AndroidX
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
