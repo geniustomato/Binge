@@ -2,7 +2,7 @@ package com.clooy.binge.feature.movieviewer.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-internal data class MovieVideosListDto(
+internal data class MovieVideosDto(
     @SerializedName("id") val id: Int,
     @SerializedName("results") val results: List<MovieVideoDto>,
 )
