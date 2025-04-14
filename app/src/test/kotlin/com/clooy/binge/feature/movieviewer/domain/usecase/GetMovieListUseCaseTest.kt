@@ -1,7 +1,5 @@
 package com.clooy.binge.feature.movieviewer.domain.usecase
 
-import com.clooy.binge.feature.movieviewer.data.utils.DomainError
-import com.clooy.binge.feature.movieviewer.data.utils.DomainResult
 import com.clooy.binge.feature.movieviewer.data.utils.generateMoviePosterUrl
 import com.clooy.binge.feature.movieviewer.data.utils.toLocalDate
 import com.clooy.binge.feature.movieviewer.domain.model.MovieSummary
@@ -12,6 +10,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class GetMovieListUseCaseTest {
 
@@ -21,6 +20,7 @@ class GetMovieListUseCaseTest {
 
     private val TEST_MOVIE_SUMMARY = List(10) { i ->
         MovieSummary(
+            id = i,
             title = i.toString(),
             releaseDate = "2025-12-25".toLocalDate(),
             rating = i.toDouble(),
@@ -35,19 +35,16 @@ class GetMovieListUseCaseTest {
 
     @Test
     fun invoke_onSuccess_returnCorrectResult() = runTest {
-        val expected = DomainResult.Success(TEST_MOVIE_SUMMARY)
+        val expected = TEST_MOVIE_SUMMARY
         coEvery { movieRepository.getPopularMovieList(page = any()) } returns expected
 
-        val actual = SUT()
+        val actual = SUT(page = 1)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun invoke_onFailure_returnCorrectDomainError() = runTest {
-        val expected = DomainResult.Failure(DomainError.Unknown)
-        coEvery { movieRepository.getPopularMovieList(page = any()) } returns expected
-
-        val actual = SUT()
-        assertEquals(expected, actual)
+    fun invoke_onFailure_returnCorrectException() = runTest {
+        coEvery { movieRepository.getPopularMovieList(page = any()) } throws Exception()
+        assertThrows<Exception> { SUT(page = 1) }
     }
 }

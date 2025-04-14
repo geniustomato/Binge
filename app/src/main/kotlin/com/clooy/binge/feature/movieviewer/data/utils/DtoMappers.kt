@@ -9,6 +9,7 @@ import com.clooy.binge.feature.movieviewer.domain.model.MovieSummary
 
 internal fun MovieSummaryDto.toMovieSummary(): MovieSummary =
     MovieSummary(
+        id = id,
         title = title,
         releaseDate = releaseDate.toLocalDate(),
         rating = voteAverage,

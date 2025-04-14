@@ -3,8 +3,6 @@ package com.clooy.binge.feature.movieviewer.data.repository
 import com.clooy.binge.feature.movieviewer.data.remote.api.TmdbService
 import com.clooy.binge.feature.movieviewer.data.remote.dto.MovieSummaryDto
 import com.clooy.binge.feature.movieviewer.data.remote.dto.PopularMoviesListDto
-import com.clooy.binge.feature.movieviewer.data.utils.DomainError
-import com.clooy.binge.feature.movieviewer.data.utils.DomainResult
 import com.clooy.binge.feature.movieviewer.data.utils.toMovieSummary
 import com.clooy.binge.feature.movieviewer.domain.repository.MovieRepository
 import io.mockk.coEvery
@@ -13,7 +11,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.fail
+import org.junit.jupiter.api.assertThrows
 import retrofit2.Response
 
 class MovieRepositoryImplTest {
@@ -39,8 +37,7 @@ class MovieRepositoryImplTest {
 
     @Test
     fun getPopularMovieList_onSuccess_returnCorrectResults() = runTest {
-        val expected =
-            DomainResult.Success(data = TEST_MOVIE_SUMMARY_DTO.map { it.toMovieSummary() })
+        val expected = TEST_MOVIE_SUMMARY_DTO.map { it.toMovieSummary() }
 
         coEvery { tmdbService.getPopularMoviesList(page = any()) } returns Response.success(
             PopularMoviesListDto(
@@ -49,24 +46,14 @@ class MovieRepositoryImplTest {
             )
         )
 
-        when (val actual = SUT.getPopularMovieList(page = 1)) {
-            is DomainResult.Success -> assertEquals(expected, actual)
-            else -> fail("Invalid result: $actual")
-        }
+        val actual = SUT.getPopularMovieList(page = 1)
+        assertEquals(expected, actual)
     }
 
     @Test
     fun getPopularMoviesList_onNullResponseBody_returnNullResponseBody() = runTest {
-        val expected = DomainResult.Failure(error = DomainError.NullResponseBody)
-
         coEvery { tmdbService.getPopularMoviesList(page = any()) } returns Response.success(null)
 
-        when (val actual = SUT.getPopularMovieList(page = 1)) {
-            is DomainResult.Success -> {
-                fail("Invalid result: $actual")
-            }
-
-            else -> assertEquals(expected, actual)
-        }
+        assertThrows<NullPointerException> { SUT.getPopularMovieList(page = 1) }
     }
 }

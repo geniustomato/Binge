@@ -3,6 +3,7 @@ package com.clooy.binge.feature.movieviewer.domain.model
 import org.threeten.bp.LocalDate
 
 data class MovieSummary(
+    val id: Int,
     val title: String,
     val releaseDate: LocalDate,
     val rating: Double,

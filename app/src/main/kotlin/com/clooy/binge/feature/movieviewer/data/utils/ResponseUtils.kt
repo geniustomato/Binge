@@ -3,6 +3,7 @@ package com.clooy.binge.feature.movieviewer.data.utils
 import retrofit2.HttpException
 import java.io.IOException
 
+// TODO Revisit this when there's more time
 sealed class DomainResult<out T> {
     data class Success<out T>(val data: T) : DomainResult<T>()
     data class Failure(val error: DomainError) : DomainResult<Nothing>()

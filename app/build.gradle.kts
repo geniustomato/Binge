@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.navigation.compose)
+    implementation(libs.lifecycle.runtime.compose)
 
     // Retrofit
     implementation(libs.squareup.retrofit)
@@ -90,6 +91,7 @@ dependencies {
     testImplementation(libs.junit5.jupiter.api)
     testRuntimeOnly(libs.junit5.jupiter.engine)
     testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -6,6 +6,7 @@ import com.clooy.binge.feature.movieviewer.data.utils.toDomainError
 import retrofit2.HttpException
 import retrofit2.Response
 
+// TODO Revisit this when there's more time
 suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): DomainResult<T> {
     return try {
         val response = apiCall()
