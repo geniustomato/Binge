@@ -1,37 +1,30 @@
 package com.clooy.binge.core.network
 
+import com.clooy.binge.feature.movieviewer.data.utils.DomainError
+import com.clooy.binge.feature.movieviewer.data.utils.DomainResult
+import com.clooy.binge.feature.movieviewer.data.utils.toDomainError
 import retrofit2.HttpException
 import retrofit2.Response
 
-sealed class ApiResult<out T> {
-    data class Success<out T>(val data: T): ApiResult<T>()
-    data class Error(val throwable: Throwable): ApiResult<Nothing>()
-}
-
-suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): ApiResult<T> {
+suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): DomainResult<T> {
     return try {
         val response = apiCall()
         if (response.isSuccessful) {
             val body = response.body()
             if (body != null) {
-                ApiResult.Success(body)
+                DomainResult.Success(body)
             } else {
-                ApiResult.Error(NullPointerException("Response body is null"))
+                DomainResult.Failure(DomainError.NullResponseBody)
             }
         } else {
-            ApiResult.Error(HttpException(response))
+            DomainResult.Failure(HttpException(response).toDomainError())
         }
     } catch (e: Exception) {
-        ApiResult.Error(e)
+        DomainResult.Failure(e.toDomainError())
     }
 }
 
-inline fun <T, R> ApiResult<T>.map(transform: (T) -> R): ApiResult<R> = when (this) {
-    is ApiResult.Success -> ApiResult.Success(transform(data))
-    is ApiResult.Error -> this
-}
-
-inline fun <T> ApiResult<T>.mapError(transform: (Throwable) -> Throwable): ApiResult<T> = when (this) {
-    is ApiResult.Success -> this
-    is ApiResult.Error -> ApiResult.Error(transform(throwable))
+inline fun <T, R> DomainResult<T>.onSuccess(transform: (T) -> R): DomainResult<R> = when (this) {
+    is DomainResult.Success -> DomainResult.Success(transform(data))
+    is DomainResult.Failure -> this
 }
