@@ -71,6 +71,11 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.coil.compose)
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     // Retrofit
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.gson)

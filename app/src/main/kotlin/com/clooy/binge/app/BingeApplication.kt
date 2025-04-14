@@ -9,7 +9,6 @@ class BingeApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         AndroidThreeTen.init(this)
     }
 }

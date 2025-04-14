@@ -1,22 +1,33 @@
 package com.clooy.binge.feature.movieviewer.data.repository
 
+import android.content.Context
+import com.clooy.binge.feature.movieviewer.data.local.dao.MovieDao
 import com.clooy.binge.feature.movieviewer.data.remote.api.TmdbService
+import com.clooy.binge.feature.movieviewer.data.remote.dto.PopularMoviesListDto
+import com.clooy.binge.feature.movieviewer.data.utils.toDto
+import com.clooy.binge.feature.movieviewer.data.utils.toEntity
 import com.clooy.binge.feature.movieviewer.data.utils.toMovieDetails
 import com.clooy.binge.feature.movieviewer.data.utils.toMovieSummary
 import com.clooy.binge.feature.movieviewer.domain.model.MovieDetails
 import com.clooy.binge.feature.movieviewer.domain.model.MovieSummary
 import com.clooy.binge.feature.movieviewer.domain.repository.MovieRepository
+import okio.IOException
 import javax.inject.Inject
 
-internal class MovieRepositoryImpl @Inject constructor(private val tmdbService: TmdbService) :
-    MovieRepository {
+internal class MovieRepositoryImpl
+@Inject constructor(
+    private val tmdbService: TmdbService,
+    private val movieDao: MovieDao,
+) : MovieRepository {
 
     override suspend fun getPopularMovieList(page: Int): List<MovieSummary> = try {
         val response = tmdbService.getPopularMoviesList(page = page)
         if (response.isSuccessful) {
             val body = response.body()
             if (body != null) {
-                response.body()!!.results.map { it.toMovieSummary() }
+                val data = response.body()!!.results
+                movieDao.insertAll(data.map { it.toEntity() })
+                data.map { it.toMovieSummary() }
             } else {
                 throw NullPointerException("Null response body")
             }
@@ -24,7 +35,11 @@ internal class MovieRepositoryImpl @Inject constructor(private val tmdbService: 
             throw Exception("Unsuccessful response")
         }
     } catch (e: Exception) {
-        throw e
+        if (e is IOException) {
+            movieDao.getAll().map { it.toDto().toMovieSummary() }
+        } else {
+            throw e
+        }
     }
 
 
