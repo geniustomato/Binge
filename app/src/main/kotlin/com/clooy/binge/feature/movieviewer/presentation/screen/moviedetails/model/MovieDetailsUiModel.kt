@@ -1,6 +1,7 @@
 package com.clooy.binge.feature.movieviewer.presentation.screen.moviedetails.model
 
 import com.clooy.binge.feature.movieviewer.domain.model.MovieDetails
+import com.clooy.binge.feature.movieviewer.presentation.screen.moviedetails.utils.formatMinutesToHoursAndMinutes
 
 internal data class MovieDetailsUiModel(
     val title: String,
@@ -19,7 +20,7 @@ internal fun MovieDetails.toMovieDetailsUiModel() =
         posterUrl = posterUrl,
         year = releaseDate.year.toString(),
         rating = rating,
-        duration = "convert to time format",
+        duration = formatMinutesToHoursAndMinutes(duration),
         genres = genres.map { it.name },
         synopsis = overview,
     )

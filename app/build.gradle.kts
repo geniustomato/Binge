@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.navigation.compose)
     implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.coil.compose)
 
     // Retrofit
     implementation(libs.squareup.retrofit)

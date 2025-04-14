@@ -25,6 +25,7 @@ internal class MovieListViewModel @Inject constructor(
 
     fun loadMovieList(page: Int) {
         viewModelScope.launch {
+            _uiState.value = MovieListState.Loading
             _uiState.value = try {
                 val data = getMovieListUseCase.invoke(page = page)
                 MovieListState.Success(data = MovieListUiModel(movies = data.map { it.toMovieUiModel() }))

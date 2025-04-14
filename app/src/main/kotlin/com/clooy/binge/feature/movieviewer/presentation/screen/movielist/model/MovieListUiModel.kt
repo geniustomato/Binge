@@ -14,8 +14,6 @@ internal data class MovieUiModel(
     val rating: Double,
 )
 
-
-
 internal fun MovieSummary.toMovieUiModel() =
     MovieUiModel(
         id = id,

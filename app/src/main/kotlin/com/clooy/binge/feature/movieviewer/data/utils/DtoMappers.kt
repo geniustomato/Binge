@@ -21,7 +21,7 @@ internal fun MovieDetailsDto.toMovieDetails(): MovieDetails =
         title = title,
         releaseDate = releaseDate.toLocalDate(),
         rating = voteAverage,
-        posterUrl = generateMoviePosterUrl(imageSize = ImageSize.W185, posterPath = posterPath),
+        posterUrl = generateMoviePosterUrl(imageSize = ImageSize.W500, posterPath = posterPath),
         duration = runtime,
         genres = genres.map { it.toMovieGenre() },
         overview = overview,
