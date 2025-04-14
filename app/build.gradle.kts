@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.dagger.hilt)
 }
@@ -53,15 +54,22 @@ tasks.withType<Test> {
 
 dependencies {
 
+    implementation(libs.kotlinx.serialization.json)
+
     // AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Compose
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.navigation.compose)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.coil.compose)
 
     // Retrofit
     implementation(libs.squareup.retrofit)
@@ -72,6 +80,7 @@ dependencies {
     implementation(libs.jetbrains.kotlinx.coroutines.android)
 
     // Dagger Hilt
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.compiler)
 
@@ -83,6 +92,7 @@ dependencies {
     testImplementation(libs.junit5.jupiter.api)
     testRuntimeOnly(libs.junit5.jupiter.engine)
     testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

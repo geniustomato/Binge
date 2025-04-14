@@ -1,37 +1,45 @@
 [versions]
 agp = "8.9.1"
+coilCompose = "2.4.0"
 kotlin = "2.0.0"
+kotlinxSerializationJson = "1.8.0"
 coreKtx = "1.16.0"
 junit4 = "4.13.2"
 junit5 = "5.11.3"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-kotlinxCoroutinesTest = "1.7.3"
+kotlinxCoroutinesTest = "1.10.1"
+androidxNavigationCompose = "2.8.9"
+androidxHiltNavigationCompose = "1.2.0"
+lifecycleRuntimeCompose = "2.8.7"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 composeBom = "2025.04.00"
+material3Pullrefresh = "1.2.0-alpha05"
 mockk = "1.14.0"
 retrofit = "2.11.0"
 coroutines = "1.10.1"
 googleDaggerHilt = "2.55"
 threetenabp = "1.4.9"
+turbine = "1.0.0"
 
 [libraries]
 
-# Testing
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 junit5-jupiter-api = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
 junit5-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
-
-# AndroidX
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+androidx-compose-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -43,13 +51,17 @@ squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", versi
 squareup-retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 jetbrains-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 jetbrains-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 google-dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "googleDaggerHilt" }
 google-dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "googleDaggerHilt" }
 threetenabp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threetenabp" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "kotlin-kapt" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "googleDaggerHilt" }
+
