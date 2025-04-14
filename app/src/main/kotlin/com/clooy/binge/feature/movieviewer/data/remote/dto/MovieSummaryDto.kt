@@ -8,4 +8,5 @@ internal data class MovieSummaryDto(
     @SerializedName("release_date") val releaseDate: String,
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("poster_path") val posterPath: String,
+    @SerializedName("popularity") val popularity: Double
 )

@@ -167,13 +167,6 @@ private fun RowScope.MovieGridItem(
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = movie.title,
-            modifier = Modifier.padding(top = 4.dp),
-            maxLines = 1,
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        Text(
             text = movie.year,
             modifier = Modifier.padding(top = 4.dp),
             maxLines = 1,

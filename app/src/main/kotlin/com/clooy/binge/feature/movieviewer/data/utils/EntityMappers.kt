@@ -9,7 +9,8 @@ internal fun MovieSummaryDto.toEntity(): MovieEntity {
         title = title,
         releaseDate = releaseDate,
         voteAverage = voteAverage,
-        posterPath = posterPath
+        posterPath = posterPath,
+        popularity = popularity
     )
 }
 
@@ -19,6 +20,7 @@ internal fun MovieEntity.toDto(): MovieSummaryDto {
         title = title,
         releaseDate = releaseDate,
         voteAverage = voteAverage,
-        posterPath = posterPath
+        posterPath = posterPath,
+        popularity = popularity
     )
 }

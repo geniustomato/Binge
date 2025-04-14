@@ -47,7 +47,7 @@ internal fun MovieDetailsScreenRoute(
     when (uiState) {
         MovieDetailsState.Loading -> LoadingScreen()
         MovieDetailsState.Error -> MessageWithRetry(
-            message = stringResource(R.string.something_went_wrong),
+            message = stringResource(R.string.no_network_connection),
             onRetry = { viewModel.loadMovieDetails(movieId = movieId) }
         )
 

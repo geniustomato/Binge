@@ -10,6 +10,7 @@ data class MovieEntity(
     val releaseDate: String,
     val voteAverage: Double,
     val posterPath: String,
+    val popularity: Double,
     val isSynced: Boolean = false // Track if synced with server
 )
 

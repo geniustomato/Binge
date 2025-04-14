@@ -1,9 +1,8 @@
 package com.clooy.binge.feature.movieviewer.data.repository
 
-import android.content.Context
+import android.util.Log
 import com.clooy.binge.feature.movieviewer.data.local.dao.MovieDao
 import com.clooy.binge.feature.movieviewer.data.remote.api.TmdbService
-import com.clooy.binge.feature.movieviewer.data.remote.dto.PopularMoviesListDto
 import com.clooy.binge.feature.movieviewer.data.utils.toDto
 import com.clooy.binge.feature.movieviewer.data.utils.toEntity
 import com.clooy.binge.feature.movieviewer.data.utils.toMovieDetails
@@ -27,7 +26,7 @@ internal class MovieRepositoryImpl
             if (body != null) {
                 val data = response.body()!!.results
                 movieDao.insertAll(data.map { it.toEntity() })
-                data.map { it.toMovieSummary() }
+                data.sortedByDescending { it.popularity }.map { it.toMovieSummary() }
             } else {
                 throw NullPointerException("Null response body")
             }
@@ -36,8 +35,9 @@ internal class MovieRepositoryImpl
         }
     } catch (e: Exception) {
         if (e is IOException) {
-            movieDao.getAll().map { it.toDto().toMovieSummary() }
+            movieDao.getAll().sortedByDescending { it.popularity }.map { it.toDto().toMovieSummary() }
         } else {
+            Log.d("TEST", "Throwing unknown e: ${e.toString()}")
             throw e
         }
     }

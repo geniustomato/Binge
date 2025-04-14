@@ -11,7 +11,7 @@ internal data class MovieUiModel(
     val title: String,
     val posterUrl: String,
     val year: String,
-    val rating: Double,
+    val rating: String,
 )
 
 internal fun MovieSummary.toMovieUiModel() =
@@ -20,5 +20,5 @@ internal fun MovieSummary.toMovieUiModel() =
         title = title,
         posterUrl = posterUrl,
         year = releaseDate.year.toString(),
-        rating = rating,
+        rating = rating.toString(),
     )
