@@ -37,7 +37,6 @@ internal class MovieRepositoryImpl
         if (e is IOException) {
             movieDao.getAll().sortedByDescending { it.popularity }.map { it.toDto().toMovieSummary() }
         } else {
-            Log.d("TEST", "Throwing unknown e: ${e.toString()}")
             throw e
         }
     }
