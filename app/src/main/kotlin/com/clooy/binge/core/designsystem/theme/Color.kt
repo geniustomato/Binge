@@ -1,4 +1,4 @@
-package com.example.compose
+package com.clooy.binge.core.designsystem.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF576422)

@@ -9,7 +9,6 @@ import com.clooy.binge.feature.movieviewer.data.local.entity.MovieEntity
 
 @Dao
 interface MovieDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(movies: List<MovieEntity>)
 

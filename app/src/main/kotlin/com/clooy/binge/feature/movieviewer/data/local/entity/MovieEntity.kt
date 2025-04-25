@@ -13,5 +13,3 @@ data class MovieEntity(
     val popularity: Double,
     val isSynced: Boolean = false // Track if synced with server
 )
-
-
